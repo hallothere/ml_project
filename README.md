@@ -1,33 +1,33 @@
-# AIPM ML Project - Expedia Hotel Recommendations (Regression Variant)
+# AI Product Project - Expedia Hotel Recommendations (Classification)
 
 ## Project Description
-This project focuses on optimizing the user journey within the travel industry by improving hotel search relevance. Using the **Expedia Dataset**, we aim to predict the likelihood of a user booking a specific hotel cluster.
+This project focuses on optimizing the user journey within the travel industry by improving hotel search relevance. Using the **Expedia Dataset**, we aim to classify which hotel cluster a user is most likely to book.
 
-Our approach centers on **AI Product Thinking** to bridge the gap between algorithmic performance and business value. While the task is implemented as a **Regression Variant** to estimate booking probabilities, the project scope covers the entire product lifecycle:
-- Identifying user friction points in the search-to-booking funnel.
-- Aligning ML evaluation metrics (MSE/MAE) with business KPIs like Conversion Rate (CR).
-- Assessing technical feasibility, data leakage, and potential bias to ensure a trustworthy user experience.
+Our approach centers on **AI Product Thinking** to bridge the gap between algorithmic performance and business value. By framing this as a **Multi-class Classification** task, we aim to provide personalized recommendations that:
+- Reduce search friction in the booking funnel.
+- Align ML evaluation metrics (Accuracy, Top-k) with business KPIs like Conversion Rate (CR).
+- Address technical feasibility, including handling highly imbalanced data and preventing data leakage.
 
 ## The Way to Success: Deliverables & Workflow
 The project is structured to simulate a real-world machine learning deployment, moving from strategic framing to technical execution:
 
 1. **Strategic Framing:** Defining the Product Requirements Document (PRD), user personas, and success metrics.
-2. **Data Intelligence:** Performing Exploratory Data Analysis (EDA) to identify data gaps and bias risks.
-3. **ML Engineering (Decision Trees):** - [Decision Trees Regression](1_Decision_Trees_Visualization.ipynb)
-   - [Decision Trees Classification](2_Decision_Trees_Classification.ipynb)
-4. **Experimentation & Rationale:** Documenting model iterations and the decision-making process for the final architecture.
+2. **Data Intelligence:** Performing Exploratory Data Analysis (EDA) to identify patterns, data gaps, and bias risks.
+3. **ML Engineering (Decision Trees):** - [Decision Trees Classification](1_Decision_Trees_Classification.ipynb)
+   - [Decision Trees Recap](2_Decision_Trees_Recap.ipynb)
+4. **Experimentation & Rationale:** Documenting model iterations and the decision-making process for the chosen features and hyperparameters.
 5. **Business Alignment:** Mapping ML performance back to product-level OKRs (Objectives and Key Results).
 6. **Risk & Deployment:** Conducting failure mode analysis and defining a post-launch iteration roadmap.
 
 ## Objectives
 By the end of this project, the following core competencies are demonstrated:
 
-- **AI Product Leadership:** The ability to translate complex business problems into viable machine learning objectives.
-- **ML Framing & Selection:** Expertise in justifying model types (Regression vs. Classification) and establishing rigorous baselines.
-- **Analytical Reasoning:** Evaluating data feasibility and identifying risks such as data leakage or fairness concerns early in the process.
-- **Technical Literacy:** Proficiency in implementing and tuning Decision Tree algorithms, including the interpretation of splitting criteria and model pruning.
-- **Strategic Communication:** Translating technical trade-offs (e.g., latency vs. accuracy) into actionable insights for stakeholders.
-- **Operational Excellence:** Managing the end-to-end ML lifecycle, from initial discovery to risk mitigation and long-term maintenance strategies.
+- **AI Product Leadership:** Translating complex business problems into viable multi-class classification objectives.
+- **ML Framing & Selection:** Justifying the use of Decision Trees for tabular data and establishing a strong baseline (e.g., most popular cluster).
+- **Analytical Reasoning:** Evaluating data feasibility and identifying risks such as class imbalance or data leakage.
+- **Technical Literacy:** Proficiency in implementing and tuning Decision Tree Classifiers, including understanding splitting criteria (Gini/Entropy).
+- **Strategic Communication:** Translating technical trade-offs (e.g., precision vs. recall in recommendations) into actionable insights.
+- **Operational Excellence:** Managing the end-to-end ML lifecycle, from initial discovery to ethical risk mitigation.
 
 ## Set up your Environment
 
