@@ -79,26 +79,40 @@ Please make sure you have cloned or forked the repo and set up a new virtual env
 ---
 
 ## Data Pipeline & Reproducibility
+Due to the significant size of the original dataset (exceeding 4GB), we do not store raw data in this repository. We use a standardized pipeline to ensure consistency and memory efficiency across the team.
 
-Due to the significant size of the original dataset (the training set exceeds 4GB), we do not store raw data in this repository. To ensure all team members work on an identical data foundation without memory issues, follow these steps:
-
-### 1. Source Data
-Download the dataset from the [Kaggle Expedia Hotel Recommendations Competition](https://www.kaggle.com/competitions/expedia-hotel-recommendations/data). 
-* Place the downloaded `train.csv` and `destinations.csv` into the `data/raw/` directory.
-
-### 2. Data Sampling Strategy
-To optimize for local development and high-signal events, we focus exclusively on **confirmed booking events** (`is_booking = 1`). This reduces the dataset from ~37M rows to a manageable **3.0M high-quality records**.
-
-### 3. Generate the Dataset
-Run the automated processing script to filter the data and prepare the working sample. This script uses **chunking** to ensure it runs efficiently on standard laptops with limited RAM:
+### 1. Environment Update
+Before running the pipeline, ensure your virtual environment is active and all dependencies (including `pyarrow` for Parquet support) are up to date:
 
 ```BASH
+pip install -r requirements.txt
+```
+
+### 2. Source Data
+Download the dataset from the Kaggle Expedia Competition.
+
+Place train.csv and destinations.csv into the data/raw/ directory.
+
+### 3. Processing & Optimization Strategy
+The automated script make_dataset.py transforms the raw data into our "Single Source of Truth":
+
+- Filtering: Focuses on confirmed bookings (is_booking = 1).
+
+- Merging: Enriches logs with latent features from destinations.csv.
+
+- Cleaning: Removes records with missing destination signals (approx. 12k rows).
+
+- Memory Optimization: Uses chunking for low-RAM processing and casts features to float32.
+
+- High-Speed Storage: Saves the result in Parquet format for optimized loading.
+
+### 4. Generate the Dataset
+- Run the following command to create the model-ready dataset:
+```BASH
 python src/data/make_dataset.py
-````
+```
 
-**Expected Output:** The script will generate a consolidated file: `data/processed/train_bookings_sample.csv`. This file serves as the standardized foundation for all subsequent EDA and Modeling tasks.
-
----
+**Expected Output:** The script generates data/processed/df_model.parquet. This file (~2.98M rows) is the mandatory foundation for all EDA and Modeling tasks.
 
 ## Project Structure
 ```text
