@@ -1,23 +1,5 @@
 ### **Column: DONE (Completed Tasks)**
 
-#### **Ticket: [DATA-01] Repository Structure & Data Protection**
-**Description:**
-* **Context:** A professional ML project needs a standardized folder structure that protects against accidental uploads of large datasets.
-* **Task:** Initialize project directories and configure Git safety.
-* **Steps taken:** 1. Created folder structure (`data/raw`, `data/processed`, `src/data`, `notebooks`).
-    2. Implemented `.gitkeep` files to track empty data directories.
-    3. Configured `.gitignore` with `data/**/*` to block large CSV files while allowing placeholder files.
-* **Expected Result:** A production-ready repository structure that is consistent for all team members.
-* **Assignee:** Daniela
-
-#### **Ticket: [DOCS-01] Product Requirements Document (PRD.md) Finalization**
-**Description:**
-* **Context:** Need a strategic "North Star" for the project.
-* **Task:** Define the AI Product Framing (Classification vs. Regression error fix).
-* **Steps taken:** Documented User Persona, MAP@5 metric, and the 9-point PRD structure.
-* **Expected Result:** A live document that guides all modeling and business decisions.
-* **Assignee:** Daniela
-
 #### **Ticket: [DATA-02] Initial Dataset Acquisition & Local Sync**
 **Description:**
 * **Context:** The team needs access to the raw 37M row Expedia dataset.
@@ -56,6 +38,28 @@
     3. Extract seasonal month/day-of-week signals.
 * **Expected Result:** A centralized `src/features.py` module used by all notebooks.
 * **Assignee:** Inbal
+
+---
+
+### **Column: Review**
+
+#### **Ticket: [DATA-01] Repository Structure & Data Protection**
+**Description:**
+* **Context:** A professional ML project needs a standardized folder structure that protects against accidental uploads of large datasets.
+* **Task:** Initialize project directories and configure Git safety.
+* **Steps taken:** 1. Created folder structure (`data/raw`, `data/processed`, `src/data`, `notebooks`).
+    2. Implemented `.gitkeep` files to track empty data directories.
+    3. Configured `.gitignore` with `data/**/*` to block large CSV files while allowing placeholder files.
+* **Expected Result:** A production-ready repository structure that is consistent for all team members.
+* **Assignee:** Daniela
+
+#### **Ticket: [DOCS-01] Product Requirements Document (PRD.md) Finalization**
+**Description:**
+* **Context:** Need a strategic "North Star" for the project.
+* **Task:** Define the AI Product Framing (Classification vs. Regression error fix).
+* **Steps taken:** Documented User Persona, MAP@5 metric, and the 9-point PRD structure.
+* **Expected Result:** A live document that guides all modeling and business decisions.
+* **Assignee:** Daniela
 
 ---
 
