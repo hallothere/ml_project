@@ -45,6 +45,7 @@ Please make sure you have cloned or forked the repo and set up a new virtual env
     source .venv/bin/activate
     pip install --upgrade pip
     pip install -r requirements.txt
+    pip install -e
     ```
 ### **`WindowsOS`** type the following commands :
 
@@ -58,6 +59,7 @@ Please make sure you have cloned or forked the repo and set up a new virtual env
     .venv\Scripts\Activate.ps1
     python -m pip install --upgrade pip
     pip install -r requirements.txt
+    pip install -e
     ```
 
     For `Git-Bash` CLI :
@@ -68,6 +70,7 @@ Please make sure you have cloned or forked the repo and set up a new virtual env
     source .venv/Scripts/activate
     python -m pip install --upgrade pip
     pip install -r requirements.txt
+    pip install -e
     ```
      **`Note:`**
     If you encounter an error when trying to run `pip install --upgrade pip`, try using the following command:
