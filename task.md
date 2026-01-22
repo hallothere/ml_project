@@ -8,22 +8,12 @@
 * **Expected Result:** Data is accessible locally for all members.
 * **Assignee:** Inbal
 
-#### **Ticket: [ENG-03] Reproducible Data Pipeline Script**
-**Description:**
-* **Context:** The raw 4GB dataset exceeds GitHub limits and local RAM capacities. We need a standardized way to generate our 3M-record booking sample locally.
-* **Task:** Implement a data processing script (`make_dataset.py`) using pandas chunking.
-* **Steps taken:** 1. Implemented chunk-based reading (500k rows/chunk).
-    2. Added `is_booking == 1` filter logic.
-    3. Integrated auto-directory creation for `data/processed/`.
-* **Expected Result:** Every team member generates an identical 3,000,693-row CSV file via a single terminal command.
-* **Assignee:** Daniela
-
 #### **Ticket: [MODEL-01] Simple Baseline: Most Popular Cluster Ranking**
 **Description:**
 * **Context:** We need a "dumb" baseline to prove that AI actually adds value.
 * **Task:** Calculate the Top-5 most popular clusters per destination.
 * **Expected Result:** A baseline MAP@5 score to beat with ML.
-* **Assignee:** Nils
+* **Assignee:** Inbal
 
 ---
 
@@ -51,6 +41,16 @@
     2. Implemented `.gitkeep` files to track empty data directories.
     3. Configured `.gitignore` with `data/**/*` to block large CSV files while allowing placeholder files.
 * **Expected Result:** A production-ready repository structure that is consistent for all team members.
+* **Assignee:** Daniela Anita
+
+#### **Ticket: [ENG-03] Reproducible Data Pipeline Script**
+**Description:**
+* **Context:** The raw 4GB dataset exceeds GitHub limits and local RAM capacities. We need a standardized way to generate our 3M-record booking sample locally.
+* **Task:** Implement a data processing script (`make_dataset.py`) using pandas chunking.
+* **Steps taken:** 1. Implemented chunk-based reading (500k rows/chunk).
+    2. Added `is_booking == 1` filter logic.
+    3. Integrated auto-directory creation for `data/processed/`.
+* **Expected Result:** Every team member generates an identical 3,000,693-row CSV file via a single terminal command.
 * **Assignee:** Daniela
 
 #### **Ticket: [DOCS-01] Product Requirements Document (PRD.md) Finalization**
@@ -65,6 +65,8 @@
 
 ### **Column: TO DO (Pending Tasks)**
 
+
+### To Do recheck the meaning of it
 #### **Ticket: [EDA-01] Visual EDA & Target Leakage Audit**
 **Description:**
 * **Context:** Ensuring our features are valid and the model isn't "cheating" by using future information.
@@ -74,7 +76,7 @@
     2. Check for "Time-Travel" leakage in the training split.
     3. Visualize cluster distributions to identify class imbalance.
 * **Expected Result:** A leakage-free feature set and 5-7 high-quality plots for the presentation.
-* **Assignee:** Daniela
+* **Assignee:** 
 
 #### **Ticket: [MODEL-02] Baseline ML: Decision Tree Classifier**
 **Description:**
