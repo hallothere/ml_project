@@ -1,21 +1,14 @@
 ### **Column: DONE (Completed Tasks)**
 
-#### **Ticket: [DATA-01] Initial Dataset Acquisition & Local Sync**
+#### **Ticket: [DATA-01] Repository Structure & Data Protection**
 **Description:**
-* **Context:** The team needs access to the raw 37M row Expedia dataset.
-* **Task:** Secure the data and set up safety guardrails for GitHub.
-* **Steps taken:** 1. Downloaded `train.csv` and `destinations.csv` from Kaggle.
-    2. Configured `.gitignore` to prevent multi-GB files from being pushed to the remote.
-**Expected Result:** Data is accessible locally for all members; Repo remains lightweight.
-**Assignee:** Inbal
-
-#### **Ticket: [DATA-02] Technical Sampling (3M Booking Subset)**
-**Description:**
-* **Context:** Full dataset processing is too memory-intensive for local laptops.
-* **Task:** Extract high-value signals (confirmed bookings).
-* **Steps taken:** Filtered raw data where `is_booking = 1`, resulting in a stable 3,000,693 record CSV.
-**Expected Result:** A manageable training set that retains the core "conversion" signal.
-**Assignee:** Nils
+* **Context:** A professional ML project needs a standardized folder structure that protects against accidental uploads of large datasets.
+* **Task:** Initialize project directories and configure Git safety.
+* **Steps taken:** 1. Created folder structure (`data/raw`, `data/processed`, `src/data`, `notebooks`).
+    2. Implemented `.gitkeep` files to track empty data directories.
+    3. Configured `.gitignore` with `data/**/*` to block large CSV files while allowing placeholder files.
+**Expected Result:** A production-ready repository structure that is consistent for all team members.
+**Assignee:** Daniela
 
 #### **Ticket: [DOCS-01] Product Requirements Document (PRD.md) Finalization**
 **Description:**
@@ -25,24 +18,30 @@
 **Expected Result:** A live document that guides all modeling and business decisions.
 **Assignee:** Daniela
 
+#### **Ticket: [DATA-02] Initial Dataset Acquisition & Local Sync**
+**Description:**
+* **Context:** The team needs access to the raw 37M row Expedia dataset.
+* **Task:** Secure the data and set up local access.
+* **Steps taken:** 1. Downloaded `train.csv` and `destinations.csv` from Kaggle.
+**Expected Result:** Data is accessible locally for all members.
+**Assignee:** Inbal
+
+#### **Ticket: [ENG-03] Reproducible Data Pipeline Script**
+**Description:**
+* **Context:** The raw 4GB dataset exceeds GitHub limits and local RAM capacities. We need a standardized way to generate our 3M-record booking sample locally.
+* **Task:** Implement a data processing script (`make_dataset.py`) using pandas chunking.
+* **Steps taken:** 1. Implemented chunk-based reading (500k rows/chunk).
+    2. Added `is_booking == 1` filter logic.
+    3. Integrated auto-directory creation for `data/processed/`.
+**Expected Result:** Every team member generates an identical 3,000,693-row CSV file via a single terminal command.
+**Assignee:** Daniela
+
 #### **Ticket: [MODEL-01] Simple Baseline: Most Popular Cluster Ranking**
 **Description:**
 * **Context:** We need a "dumb" baseline to prove that AI actually adds value.
 * **Task:** Calculate the Top-5 most popular clusters per destination.
 * **Expected Result:** A baseline MAP@5 score to beat with ML.
 **Assignee:** Nils
-
-#### **Ticket: [ENG-03] Reproducible Data Pipeline Script**
-**Description:**
-* **Context:** The raw 4GB dataset exceeds GitHub limits and local RAM capacities. To ensure all team members work on the exact same data foundation, we need a standardized local processing script.
-* **Task:** Implement a data processing script (`make_dataset.py`) using pandas chunking to filter for booking events.
-* **Implementation Steps:**
-    1. Read `data/raw/train.csv` in chunks of 500,000 rows to optimize memory usage.
-    2. Apply a filter for `is_booking == 1`.
-    3. Export the consolidated filtered results to `data/processed/train_bookings_sample.csv`.
-    4. Ensure the script handles directory creation and provides progress logs.
-* **Expected Result:** Every team member generates an identical 3,000,693-row CSV file, ensuring reproducibility across all models and EDAs.
-**Assignee:** Daniela
 
 ---
 
@@ -61,6 +60,17 @@
 ---
 
 ### **Column: TO DO (Pending Tasks)**
+
+#### **Ticket: [EDA-01] Visual EDA & Target Leakage Audit**
+**Description:**
+* **Context:** Ensuring our features are valid and the model isn't "cheating" by using future information.
+* **Task:** Conduct a visual analysis and feature validation.
+* **Implementation Steps:**
+    1. Audit features for "Search Context" vs "Post-Booking" data.
+    2. Check for "Time-Travel" leakage in the training split.
+    3. Visualize cluster distributions to identify class imbalance.
+**Expected Result:** A leakage-free feature set and 5-7 high-quality plots for the presentation.
+**Assignee:** Daniela
 
 #### **Ticket: [MODEL-02] Baseline ML: Decision Tree Classifier**
 **Description:**
@@ -81,15 +91,6 @@
     2. Hyperparameter optimization (Depth, Learning Rate).
 **Expected Result:** A model achieving the highest MAP@5 score for the presentation.
 **Assignee:** Anita
-
-#### **Ticket: [EDA-01] Visual EDA & Target Leakage Audit**
-**Description:**
-* **Context:** Ensuring our features are valid and the model isn't "cheating."
-* **Task:** Visual analysis of the 3M sample.
-* **Steps:** 1. Plot Cluster distributions. 
-    2. Check for "Data Leakage" (Is info available at search time?).
-**Expected Result:** 5-7 high-quality plots for the final presentation.
-**Assignee:** *Unassigned*
 
 #### **Ticket: [ENG-02] MAP@5 & Top-K Evaluation Engine**
 **Description:**
