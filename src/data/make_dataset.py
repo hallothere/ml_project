@@ -1,49 +1,65 @@
 import pandas as pd
 import os
+from pathlib import Path
 
-def prepare_expedia_data(input_path='data/raw/train.csv', 
-                         output_path='data/processed/train_bookings_sample.csv'):
+def make_dataset():
     """
-    Filters the massive Expedia dataset to include only booking events.
-    This creates a manageable and consistent data foundation for the team.
+    Creates a consolidated dataset by merging booking events with destination data,
+    applying memory optimizations (chunking, float32 casting), and saving as Parquet.
     """
+    # Define paths using Pathlib
+    PROJECT_ROOT = Path(".")
+    DATA_DIR = PROJECT_ROOT / "data"
+    raw_train_path = DATA_DIR / "raw" / "train.csv"
+    raw_dest_path = DATA_DIR / "raw" / "destinations.csv"
+    processed_path = DATA_DIR / "processed" / "df_model.parquet"
     
-    print(f"🚀 Starting data processing from {input_path}...")
+    # 1. Load destinations and prepare index (Nils' logic)
+    print("Loading destinations...")
+    df_dest = pd.read_csv(raw_dest_path).set_index("srch_destination_id")
+    dest_cols = df_dest.columns.tolist()
     
-    # Ensure the output directory exists
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    
-    # Define chunk size to prevent memory exhaustion (approx 500k rows at a time)
+    # Initialize chunking process
     chunk_size = 500000
-    first_chunk = True
-    total_rows = 0
+    all_processed_chunks = []
     
-    try:
-        # Initialize the TextFileReader to process the file in segments
-        reader = pd.read_csv(input_path, chunksize=chunk_size)
+    print("Starting chunking, merging and cleaning...")
+    
+    # 2. Process train.csv in chunks to prevent memory overflow
+    for chunk in pd.read_csv(raw_train_path, chunksize=chunk_size):
         
-        for i, chunk in enumerate(reader):
-            # FILTER: Keep only rows where a booking actually occurred
-            # This reduces the data from ~37M rows to ~3M rows
-            filtered_chunk = chunk[chunk['is_booking'] == 1]
-            
-            # Save: Write new file for the first chunk, then append (mode='a')
-            if first_chunk:
-                filtered_chunk.to_csv(output_path, index=False)
-                first_chunk = False
-            else:
-                filtered_chunk.to_csv(output_path, index=False, mode='a', header=False)
-            
-            total_rows += len(filtered_chunk)
-            if (i + 1) % 10 == 0:
-                print(f"   Processed { (i+1) * chunk_size } rows...")
+        # A. Filter for successful bookings only
+        chunk = chunk[chunk['is_booking'] == 1].copy()
+        
+        # B. Merge with destination data (Left join on destination ID)
+        chunk = chunk.merge(
+            df_dest,
+            how="left",
+            left_on="srch_destination_id",
+            right_index=True
+        )
+        
+        # C. Remove records with missing destination signals (12,516 records expected to drop)
+        chunk = chunk.dropna(subset=dest_cols)
+        
+        # D. Optimize memory: Cast destination features to float32
+        chunk[dest_cols] = chunk[dest_cols].astype("float32")
+        
+        # Collect processed chunks in memory
+        all_processed_chunks.append(chunk)
+        print(f"Processed chunk... current total rows: {sum(len(c) for c in all_processed_chunks)}")
 
-        print(f"✅ Success! Processed dataset saved at: {output_path}")
-        print(f"📊 Final row count: {total_rows} (approx. 3M bookings)")
-
-    except FileNotFoundError:
-        print(f"❌ Error: The file {input_path} was not found.")
-        print("💡 Action required: Download the data from Kaggle and place it in the 'data/raw/' folder.")
+    # 3. Concatenate all processed chunks and save as high-performance Parquet
+    print("Consolidating data and saving to Parquet...")
+    df_final = pd.concat(all_processed_chunks, ignore_index=True)
+    
+    # Ensure the directory exists
+    os.makedirs(DATA_DIR / "processed", exist_ok=True)
+    
+    df_final.to_parquet(processed_path, index=False)
+    
+    print(f"Done! Final dataset saved to {processed_path}")
+    print(f"Final shape: {df_final.shape}") # Target shape: (2,988,177, 173)
 
 if __name__ == "__main__":
-    prepare_expedia_data()
+    make_dataset()
