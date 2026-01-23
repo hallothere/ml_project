@@ -9,6 +9,7 @@
     * [ENG-03] Reproducible Data Pipeline Script [REVIEW]
 * **[STORY-STRATEGY] Strategic AI Product Framing**
     * [DOCS-01] Product Requirements Document (PRD.md) [REVIEW]
+    * [DOCS-02] Project Documentation: README & Requirements [STATUS: TO DO]
 * **[STORY-EDA] Data Intelligence & Feature Engineering**
     * [ENG-01] Feature Engineering V1: Behavioral Buckets [IN PROGRESS]
     * [MODEL-01] Simple Baseline: Most Popular Cluster Ranking [DONE]
@@ -19,6 +20,7 @@
     * [MODEL-02] Baseline ML: Logistic Regression [TO DO]
     * [MODEL-03] Baseline ML: Decision Tree Classifier [TO DO]
     * [MODEL-04] High-Performance Model: Gradient Boosting [TO DO]
+    * [MODEL-05] Model Performance Comparison & Visualization [TO DO]
 * **[STORY-PRESENTATION] Stakeholder Delivery & Storytelling**
     * [PRES-01] Data & Insight Synthesis [TO DO]
     * [PRES-02] Presentation Design & Business Storytelling [TO DO]
@@ -67,6 +69,16 @@
 * **Task:** Define the AI Product Framing.
 * **Steps taken:** Documented User Persona, MAP@5 metric, and the 9-point PRD structure.
 * **Expected Result:** A live document guiding all modeling decisions.
+* **Assignee:** Daniela
+
+#### Ticket: [DOCS-02] Project Documentation: README & Requirements [STATUS: TO DO]
+* **Context:** To ensure the repository is understandable for the team and mentors and to make the code environment reproducible.
+* **Task:** Establish the central project documentation and environment configuration.
+* **Implementation Steps:**
+    1. Create `README.md` with project title, installation guide, and directory structure.
+    2. Add a "Usage" section explaining how to run the data pipeline.
+    3. Generate `requirements.txt` with all necessary libraries and pinned versions.
+* **Expected Result:** A professional repository entry point and a stable, reproducible Python environment.
 * **Assignee:** Daniela
 
 ---
@@ -141,6 +153,17 @@
 * **Implementation Steps:** 1. Handle categorical features. 2. Hyperparameter optimization.
 * **Expected Result:** Highest MAP@5 score for the presentation.
 * **Assignee:** Anita
+
+#### Ticket: [MODEL-05] Model Performance Comparison & Visualization [STATUS: TO DO]
+* **Context:** We need a clear, visual way to show stakeholders how much our AI adds value compared to the simple baseline.
+* **Task:** Create a comparative analysis of all trained models based on the MAP@5 score.
+* **Implementation Steps:**
+    1. Collect final MAP@5 results from the Baseline, Logistic Regression, Decision Tree, and Gradient Boosting models.
+    2. Create a Bar Chart comparing the scores to visualize the "uplift."
+    3. Visualize the "Top-K Hit Rate" (how often the correct hotel was in our Top 1, 3, or 5).
+    4. Generate high-resolution plots (Seaborn/Matplotlib) for the final slide deck.
+* **Expected Result:** A consolidated comparison notebook/plot that clearly proves the model's performance.
+* **Assignee:** Inbal
 
 ---
 
