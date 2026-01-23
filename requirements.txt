@@ -6,3 +6,4 @@ pandas==2.0.1
 scikit-learn==1.2.2
 pyarrow==15.0.2
 tqdm==4.67.1
+lightgbm==4.6.0
