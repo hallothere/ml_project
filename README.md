@@ -11,6 +11,9 @@ Our approach centers on **AI Product Thinking** to bridge the gap between algori
 ## The Way to Success: Deliverables & Workflow
 The project is structured to simulate a real-world machine learning deployment, moving from strategic framing to technical execution:
 
+- **Products Requirements Document:** [PRD](prd.md)
+- **Final Presentation:** [Predicting Hotel Preferences at Expedia](https://www.canva.com/design/DAG_DrlK67E/Uw8Rn-KBguhz87XUJ50qEw/edit?utm_content=DAG_DrlK67E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 1. **Strategic Framing:** Defining the Product Requirements Document (PRD), user personas, and success metrics.
 2. **Data Intelligence:** Performing Exploratory Data Analysis (EDA) to identify patterns, data gaps, and bias risks.
 3. **ML Engineering:** Implementing baseline models (Popularity/Decision Trees) and advanced iterations (Gradient Boosting).
