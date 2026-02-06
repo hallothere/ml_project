@@ -215,3 +215,8 @@ data/**/*
 
 # But allow Git to see the .gitkeep files so the folders exist for everyone
 !data/**/.gitkeep
+
+notebooks/checkpoints/
+checkpoints/
+*.ckpt*
+*.weights.h5
